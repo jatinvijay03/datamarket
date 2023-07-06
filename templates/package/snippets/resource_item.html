@@ -1,0 +1,24 @@
+{%ckan_extends%}
+
+
+
+{% block resource_item_title %}
+  <a class="heading" href="{{ url }}" title="{{ res.name or res.description }}">
+    {{ h.resource_display_name(res) | truncate(50) }}<span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">{{ h.get_translated(res, 'format') }}</span>
+    {{ h.popular('views', res.tracking_summary.total, min=10) if res.tracking_summary }}
+  </a>
+{% endblock %}
+
+{% block resource_item_description %}
+{% endblock %}
+
+{% block resource_item_explore %}
+  {% if not url_is_edit %}
+  <div class="btn-group info-btn">
+    <a href="{{url}}"><i class="fa-light fa-circle-info"></i></a>
+</div>
+  {% endif %}
+  {% endblock %}
+
+
+

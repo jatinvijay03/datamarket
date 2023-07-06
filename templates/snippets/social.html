@@ -1,0 +1,16 @@
+{%ckan_extends%}
+
+
+{%block social%}
+<section class="social">
+    {% block social_title %}
+      <h4 class = "section-heading">{{ _('Social') }}</h4>
+    {% endblock %}
+    {% block social_nav %}
+      <ul type="none" class="socials-list">
+        <li class="socials-list-item"><a href="https://twitter.com/share?url={{ current_url }}" target="_blank"><i class="fa-brands fa-twitter" style="color: #000000;"></i></a></li>
+        <li class="socials-list-item"><a href="https://www.facebook.com/sharer.php?u={{ current_url }}" target="_blank"><i class="fa-brands fa-facebook-f" style="color: #000000;"></i></a></li>
+      </ul>
+    {% endblock %}
+  </section>
+{%endblock%}

@@ -1,0 +1,11 @@
+{%ckan_extends%}
+
+{%block tag_list%}
+    <ul class="{{ _class }}">
+        {% for tag in tags %}
+        <li style="margin-right: 20px;">
+            <a class="{% block tag_list_item_class %}tag{% endblock %}" href="{% url_for 'dataset.search', tags=tag.name %}"><i class="fa-solid fa-circle fa-2xs"></i> {{ tag.display_name|truncate(22) }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+{%endblock%}

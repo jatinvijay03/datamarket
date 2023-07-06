@@ -1,0 +1,77 @@
+{% ckan_extends %}
+{% import 'macros/form.html' as form %}
+
+
+
+{% block content %}
+<div class="searchpage">
+{% block toolbar %}
+{{super()}}
+{% endblock toolbar %}
+
+<div class="row">
+  <div class="col-3">
+
+  </div>
+  <div class="col-9">
+    {% block form %}
+            {{super()}}
+            {% endblock %}
+  </div>
+</div>
+
+
+
+
+
+
+<div class="row datasets-list">
+    <div class="col-md-3">
+        {% block secondary_content %}
+        <div class = "filter-section">
+            <div>
+              {% for facet in facet_titles %}
+                {{ h.snippet('snippets/facet_list.html', title=facet_titles[facet], name=facet, search_facets=search_facets) }}
+              {% endfor %}
+            </div>
+            <a class="close no-text hide-filters"><i class="fa fa-times-circle"></i><span class="text">close</span></a>
+          </div>
+        {% endblock secondary_content %}
+    </div>
+    <div class="col-md-9">
+        {% block primary_content %}
+        <section class="module">
+          <div class="module-content">
+            {% block page_primary_action %}
+              {{super()}}
+            {% endblock %}
+            
+            {% block package_search_results_list %}
+              {{ h.snippet('snippets/package_list.html', packages=page.items) }}
+            {% endblock %}
+          </div>
+      
+          {% block page_pagination %}
+            {{ page.pager(q=q) }}
+          {% endblock %}
+        </section>
+      
+        {% block package_search_results_api %}
+          <section class="module">
+            <div class="module-content">
+              {% block package_search_results_api_inner %}
+                <small>
+                  {% set api_link = h.link_to(_('API'), h.url_for('api.get_api', ver=3)) %}
+                  {% set api_doc_link = h.link_to(_('API Docs'), 'http://docs.ckan.org/en/{0}/api/'.format(g.ckan_doc_version)) %}
+                  {% trans %} You can also access this registry using the {{ api_link }} (see {{ api_doc_link}}). {% endtrans %}
+                </small>
+              {% endblock %}
+            </div>
+          </section>
+        {% endblock %}
+        
+        {% endblock primary_content %}
+    </div>
+</div>
+</div>
+{% endblock content %}

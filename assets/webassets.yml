@@ -1,0 +1,14 @@
+# datamarket-js:
+#   filter: rjsmin
+#   output: ckanext-datamarket/%(version)s-datamarket.js
+#   contents:
+#     - js/datamarket.js
+#   extra:
+#     preload:
+#       - base/main
+
+# datamarket-css:
+#   filter: cssrewrite
+#   output: ckanext-datamarket/%(version)s-datamarket.css
+#   contents:
+#     - css/datamarket.css

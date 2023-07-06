@@ -1,0 +1,73 @@
+{%ckan_extends%}
+{% set show_cart = false %}
+{% set res = resource %}
+
+
+
+
+{% block pre_primary %}
+  {% block resource %}
+    <section role="complementary">
+      {% block resource_inner %}
+      <div class="module-content">
+        <div class="actions">
+          {% block resource_actions %}
+            <ul class="d-flex flex-wrap gap-1 justify-content-end">
+              {% block resource_actions_inner %}
+                {% block action_manage %}
+                  {% if h.check_access('package_update', {'id':pkg.id }) %}
+                    <li>{% link_for _('Edit resource'), named_route=pkg.type ~ '_resource.edit', id=pkg.name, resource_id=res.id, class_='btn btn-default', icon='pencil' %}</li>
+                    {% block action_manage_inner %}{% endblock %}
+                    <li>{% link_for _('Views'), named_route=pkg.type ~ '_resource.views', id=pkg.name, resource_id=res.id, class_='btn btn-default', icon='chart-bar' %}
+                  {% endif %}
+                {% endblock action_manage %}
+          
+            {% endblock %}
+          </ul>
+          {% endblock %}
+        </div>
+        {% block resource_content %}
+          {% block resource_read_title %}<h1 class="page-heading">{{ h.resource_display_name(res) | truncate(50) }}</h1>{% endblock %}
+          {% block resource_read_url %}
+           
+          {% endblock %}
+          <div class="prose notes" property="rdfs:label">
+            {% if res.description %}
+              {{ h.render_markdown(res.description) }}
+            {% endif %}
+            {% if not res.description and package.notes %}
+              <h3>{{ _('Dataset description:') }}</h3>
+              <blockquote>{{ h.markdown_extract(h.get_translated(package, 'notes')) }}</blockquote>
+              <p>{% trans dataset=h.get_translated(package, 'title'), url=h.url_for(package.type ~ '.read', id=package.name) %}Source: <a href="{{ url }}">{{ dataset }}</a>{% endtrans %}
+            {% endif %}
+          </div>
+        {% endblock %}
+      {% block data_preview %}
+      {{super()}}
+      {% endblock %}
+      {% endblock %}
+
+    </section>
+  {% endblock %}
+{% endblock %}
+
+{% block secondary_content %}
+
+  {% block resources_list %}
+  <div class="card package-nav box">
+    {% snippet "package/snippets/resources.html", pkg=pkg, active=res.id, action='read' %}
+</div>
+  {% endblock %}
+
+  {% block resource_license %}
+  {% endblock %}
+{% endblock %}
+
+
+
+
+
+
+{%block cart_activity%}
+
+{%endblock%}

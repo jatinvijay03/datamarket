@@ -1,0 +1,20 @@
+{% ckan_extends %}
+
+{% block search_input %}
+
+{% endblock %}
+
+{% block search_search_fields %}
+
+{% endblock %}
+
+{% block search_sortby %}{% endblock %}
+
+{% block search_title %}
+    {% if not error %}
+      <h1 class="search-result-text">{% snippet 'snippets/search_result_text.html', query=query, count=count, type=type %}</h1>
+    {% else %}
+      <h2>Error</h2>
+    {% endif %}
+  {% endblock %}
+

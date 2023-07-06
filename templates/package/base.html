@@ -1,0 +1,55 @@
+{%ckan_extends%}
+
+
+
+
+{%block main_content%}
+    {%block flash%}
+        {{super()}}
+    {%endblock%}
+    {%block toolbar%}
+        {{super()}}
+    {%endblock%}
+    {% block pre_primary %}
+    
+    {% endblock %}
+
+    <div class="row">
+        <div class = "{%if show_cart%} col-9 {%else%} col-12 {%endif%}">
+            <div class="row {%if show_cart%}wrapper{%endif%}{% block wrapper_class %}{% endblock %}{% if self.secondary()|trim == '' or c.action=='resource_read' %} no-nav{% endif %}">
+                {%block secondary%}
+                    
+                        {{super()}}
+                    
+                {%endblock%}
+                {%block primary%}
+                    {{super()}}
+                {%endblock%}
+
+            </div>
+        </div>
+        {%block cart_activity%}
+        <div class="col-3">
+            <div class="card box buy-section">
+                <div class="vstack">
+                    <div class="row pricing-item">
+                    <h3>$2000</h3>
+                </div>
+                <div class="row pricing-item view-dataset-button">
+                    
+                       <a class="btn" href="#"> <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i> Buy</a>
+                    
+                </div>
+                </div>
+            </div>
+            <div class="card box">
+                <h2>Activity Monitor</h2>
+            </div>
+        </div>
+        {%endblock%}
+    </div>
+
+{% endblock %}
+ 
+
+
