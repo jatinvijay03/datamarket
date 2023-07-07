@@ -22,7 +22,6 @@ ul{
 thead{
   color: #243E8C;
   font-size: 1.2rem;
-  
 }
 
 
@@ -232,6 +231,7 @@ footer{
 
 .package-nav{
   padding: 8%;
+  margin: 0 10% 0 5%;
 }
 
 .vstack{
@@ -247,3 +247,24 @@ footer{
   color: #4A4A4A !important;
   font-weight: 600 !important;
 }
+
+.resource-link{
+  color: #000 !important;
+  font-size:14px;
+  padding-bottom: 6% !important;
+}
+.resource-link:hover{
+  text-decoration: none !important;
+  color: #243E8C !important;
+  
+}
+
+.active-resource a{
+ color: #243E8C !important;
+}
+.active-resource a:hover{
+  text-decoration: none !important;
+
+ }
+
+

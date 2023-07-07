@@ -5,26 +5,28 @@
     <section class="">
       {% block resources_inner %}
         {% block resources_title %}
-          <h3><i class="fa-solid fa-arrow-left"></i> {{ _("Back to Source") }}</h3>
+        <a href="">
+          <h3 class="data-info-heading"><i class="fa-solid fa-arrow-left"></i> {{ _("Back to Source") }}</h3>
+        </a>
         {% endblock %}
         <hr>
-        <h4>{{ _("Data and Resources") }}</h4>
+        <h4 class="data-info-heading">{{ _("Data and Resources") }}</h4>
         {% block resources_list %}
           <ul type="none">
             {% for resource in resources %}
               {% set url = h.url_for('%s_resource.read' % pkg.type, id=pkg.name, resource_id=resource.id) %}
               {% if active == resource.id %}
-                <li>
+                <li class = "active-resource" >
                     <i class="fa-solid fa-file"></i>
                   <a href="#">{{ h.resource_display_name(resource)|truncate(25) }}</a>
                 </li>
               {% elif can_edit %}
-                <li class="nav-item d-flex justify-content-between position-relative">
-                  <a class="flex-fill" href="{{ url }}">{{ h.resource_display_name(resource)|truncate(25) }}</a>
+                <li class="nav-item d-flex justify-content-between position-relative ">
+                  <a class="flex-fill resource-link" href="{{ url }}">{{ h.resource_display_name(resource)|truncate(25) }}</a>
                   <div class="dropdown position-absolute end-0 me-2">
                     <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="dropdownRes{{ loop.index }}" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-wrench"></i></button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownRes{{ loop.index }}">
-                      <li>{% link_for _('Edit resource'), named_route=pkg.type ~ '_resource.edit', id=pkg.name, resource_id=resource.id, class_='dropdown-item', icon='pencil' %}</li>
+                      <li class = "resource-link">{% link_for _('Edit resource'), named_route=pkg.type ~ '_resource.edit', id=pkg.name, resource_id=resource.id, class_='dropdown-item', icon='pencil' %}</li>
                       {% block resources_list_edit_dropdown_inner scoped %}{% endblock %}
                       <li>{% link_for _('Views'), named_route=pkg.type ~ '_resource.views', id=pkg.name, resource_id=resource.id, class_='dropdown-item', icon='chart-bar' %}</li>
                     </ul>
@@ -33,7 +35,7 @@
               {% else %}
                 <li>
                 <i class="fa-solid fa-file"></i>
-                  <a href="{{ url }}">{{ h.resource_display_name(resource)|truncate(25) }}</a>
+                  <a href="{{ url }}" class = "resource-link">{{ h.resource_display_name(resource)|truncate(25) }}</a>
                 </li>
               {% endif %}
             {% endfor %}
